@@ -1,0 +1,26 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    grid-template-rows: 150px repeat(4, 100px);
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    grid-gap: 5px;
+}
+
+.display{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    background-color: goldenrod;
+    text-align: end;
+    padding: 50px 20px;
+    font-size: 45px;
+}
+
+.grid-item{
+    border-radius: 10px;
+    background-color: grey;
+    text-align: center;
+    font-size: 30px;
+
+}
