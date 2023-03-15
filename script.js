@@ -29,10 +29,28 @@ buttons.forEach( button => button.addEventListener('click', () => {
     }else if(button.classList.contains('equal')){
         inputEqual();
         updateDisplay();
+    }else if(button.classList.contains('dot')){
+        inputDot();
+        updateDisplay();
     }
    
 }))
 
+function inputDot(){
+    
+    if(displayValue === 0){
+        displayValue += '.';
+    }
+    if(displayValue = answer) {
+        displayValue = '0.';
+    }
+    if(!displayValue.includes('.')){
+    
+        displayValue += '.';
+
+     }
+}
+    
 function inputEqual(){
 
     //press before operand
