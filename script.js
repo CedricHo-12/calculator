@@ -1,42 +1,133 @@
-function add(a,b) {
-    return a+b;
+let firstOperand = "";
+let secondOperand = "";
+let displayValue = 0;
+let firstOperator = "";
+let secondOperator = ""
+let answer = "";
+
+
+
+function updateDisplay() {
+    const display = document.getElementById("display");
+    display.innerHTML = displayValue;
+
 }
 
-function subtract(a,b){
-    return a-b;
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach( button => button.addEventListener('click', () => {
+    if(button.classList.contains('operand')){
+        inputOperand(button.innerHTML);
+        updateDisplay();
+    }else if(button.classList.contains('clear')){
+        clear();
+        updateDisplay();
+    }else if(button.classList.contains('operator')){
+        inputOperator(button.innerHTML);
+        updateDisplay();
+    }else if(button.classList.contains('equal')){
+        inputEqual();
+        updateDisplay();
+    }
+   
+}))
+
+function inputEqual(){
+
+    //press before operand
+    if(displayValue === 0){
+        displayValue = 0;
+    //press before operator
+    }else if(displayValue !== 0 && firstOperand === ""){
+        displayValue = displayValue;
+    //press after operator
+    }else {
+        secondOperand = Number(displayValue);
+        answer = operate(firstOperator,firstOperand, secondOperand);
+        displayValue = answer;
+
+        //reset operator pressed to
+        firstOperand = "";
+        secondOperand = "";
+        firstOperator = "";
+        secondOperator = "";
+        result = "";
+
+    }
 }
 
-function muliply(a,b){
-    return a*b;
-}
-
-function divide(a,b){
-    return a/b;
-}
-
-function operate(operator, number1, number2) {
-    if(operator == "+"){
-        return add(number1, number2);
-    }else if (operator == "subtract"){
-        return subtract(number1, number2);
-    }else if (operator == "multiply"){
-        return muliply(number1, number2);
-    }else if (operator == "divide"){
-        return divide(number1, number2);
+function inputOperand(operand) {
+    if(firstOperator === ""){
+        if(displayValue == 0){
+            displayValue = operand;
+        //after equal button pressed
+        }else if(displayValue === answer){
+            displayValue = operand;
+        }else {
+            displayValue += operand;
+        }
     }else{
+        if(displayValue == firstOperand){
+            displayValue = operand;
+        }else{
+            displayValue += operand;
+        }
+    }
+    
+   
+}
+
+function clear() {
+    firstOperand = "";
+    secondOperand = "";
+    displayValue = 0;
+    firstOperator = "";
+    secondOperator = "";
+    result = "";
+}
+
+function inputOperator(operator) {
+    //first operator pressed
+    if(firstOperand === "" && secondOperand === ""){
+        firstOperand = Number(displayValue);
+        firstOperator = operator;
+    //second operator pressed
+    }else if(firstOperand !== "" && secondOperand === ""){
+        secondOperator = operator;
+        secondOperand = Number(displayValue);
+        answer = operate(firstOperator, firstOperand, secondOperand)
+        displayValue = answer;
+        firstOperand = displayValue;
+    //third, fourth.. operator pressed
+    }else if(firstOperand !== "" && secondOperand !== ""){
+        secondOperand = Number(displayValue);
+        answer = operate(secondOperator, firstOperand, secondOperand);
+        displayValue = answer;
+        firstOperand = Number(displayValue);
+    }
+}
+
+
+function operate(operator, x, y) {
+    if(operator == "+"){
+        return x + y;
+    }else if (operator == "−"){
+        return x - y;
+    }else if (operator == "x"){
+        return x * y;
+    }else if (operator == "÷"){
+        if(secondOperand === 0){
+            return "math error";
+        }else {
+            return x / y;
+        }
+    }else {
         return "INVALID OPERATOR";
     }
 }
 
-const button = document.querySelectorAll(".grid-item");
-button.forEach( e => e.addEventListener("click", event => {
-    const btn = event.target.closest('button');
-    const display = document.querySelector(".display")
 
-    var key = btn.textContent;
-
-    display.innerHTML += key;
-}))
 
 
 

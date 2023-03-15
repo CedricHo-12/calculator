@@ -1,14 +1,14 @@
 .grid-container{
     display: grid;
     grid-template-columns: repeat(4, 150px);
-    grid-template-rows: 150px repeat(4, 100px);
+    grid-template-rows: 30px 150px repeat(4, 100px);
     justify-content: center;
     align-content: center;
     height: 100vh;
     grid-gap: 5px;
 }
 
-.display{
+#display{
     grid-column-start: 1;
     grid-column-end: 5;
     background-color: goldenrod;
